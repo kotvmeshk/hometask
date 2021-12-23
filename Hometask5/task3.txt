@@ -1,0 +1,12 @@
+Ivanov 23400
+Petrov 35000
+Sidorov 40000
+Jarushkina 49000
+Lysacheva 18000
+Rejghard 42000
+Djachkova 60000
+Loginova 15000
+Sergeev 40000
+Sizintseva 150000
+Karpov 120000
+Nikolaev 110000

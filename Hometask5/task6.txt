@@ -1,0 +1,5 @@
+Mathematics: 100(l) 50(pr) 20(lab)
+Chemistry: 60(l) 40(pr) 10(lab)
+Literature: 90(l) - -
+Robotics: - 50(pr) -
+Biology: 60(l) 40(pr) 10(lab)
