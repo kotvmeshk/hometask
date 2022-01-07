@@ -28,3 +28,5 @@ d = Data('26-16-1981')
 
 print(d.type('26-12-1981'))
 print(d. valid('26-16-1981'))
+
+# ghkuyfkt

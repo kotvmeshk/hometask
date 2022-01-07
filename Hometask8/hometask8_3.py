@@ -27,7 +27,7 @@ class TypeCheck:
                     break
                 else:
                     self.check_value()
-
+# fguiuoi
 
 a = TypeCheck()
 a.check_value()

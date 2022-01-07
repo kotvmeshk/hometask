@@ -2,7 +2,7 @@ class MyError(Exception):
     def __init__(self, txt):
         self.txt = txt
 
-
+# gkhh
 def div():
     try:
         inp_divisible = int(input('Введите делимое: '))
