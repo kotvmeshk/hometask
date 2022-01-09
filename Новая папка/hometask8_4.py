@@ -1,14 +1,13 @@
 class Eq:
 
-    def __init__(self, name, model):
-        self.__name = name
-        self.__model = model
+    def __init__(self, name):
+        self.name = name
         # self.price = price
         # self.quantity = quantity
         # self.items = {'Модель устройства': self.name, 'Цена за одну единицу': self.price, 'Количество': self.quantity}
-    @property
+    # @property
     def full_name (self):
-        return f'{self.__name} - {self.__model}'
+        return f'{self.name} '
     # def adding(self):
     #     try:
     #         name = input(f'Введите название: ')
@@ -56,20 +55,20 @@ class Wh:
              eq_s ={}
         self.eq_s = eq_s
     def add_eq(self, eq):
-        # eq_name = eq.full_name
+        eq_name = eq.full_name()
 
-        result = self.eq_s.get(eq.full_name, None)
+        result = self.eq.get(eq_name, None)
         if result:
-           self.eq_s[eq.full_name] +=1
+           self.eq[eq_name] +=1
         else:
-           self.eq_s.update({eq.full_name:1})
+           self.eq.update({eq_name:1})
 
     def remove_eq(self,eq ):
-        # eq_name = eq.full_name
+        eq_name = eq.full_name
 
         result = self.eq.get(eq.full_name, None)
         if result and result > 0:
-            self.eq_s[eq.full_name] -= 1
+            self.eq[eq_name] -= 1
 
         else:
             print('нет товара на складе')
@@ -102,7 +101,7 @@ class Storekeeper (Counterparty):
     def __init__(self, category, wh):
         super(Storekeeper, self).__init__(category)
         self.wh = wh
-    def give_eq(self, eq, department):
+    def give_eq(self,eq, department):
         if not department.have_eq:
             wh_eq = self.wh.remove_eq(eq)
             if wh_eq:
@@ -110,11 +109,11 @@ class Storekeeper (Counterparty):
             else:
                 print ('нет единицы товара.')
         else:
-            print("оборудование уже установлено")
+            print("нет единицы товара на складе")
 
-    def take_eq(self, eq, department):
+    def take_eq(self,eq, department):
         if department.have_eq:
-            department.remove_eq(eq)
+            department.remuve_eq(eq)
             self.wh.add_eq(eq)
 
         else:
@@ -128,10 +127,10 @@ class Storekeeper (Counterparty):
         supplier.remuve_eq(eq)
         self.wh.add_eq(eq)
 
-eq1 = Eq('Hp','x300')
-eq2 = Eq('Canon','laser jet' )
-eq3 = Eq('Xerox', '200')
-tot_eq = {eq1.full_name:2,eq2.full_name:4,eq3.full_name:1}
+pri = Eq('Hp')
+sca = Eq('Canon'  )
+xe = Eq('Xerox')
+tot_eq = {pri.full_name():2,sca.full_name():4,xe.full_name():1}
 # pri.add_eq()
 # sca.add_eq()
 # xe.add_eq()
@@ -149,8 +148,11 @@ print (store.eq)
 print (store2.eq)
 
 print ('1 action')
-print (eq1.full_name)
 # my_sk.take_eq_supl(eq = sca,my_sp = supplier)
-my_sk.give_eq(eq=eq1, department=store1)
-print (eq.full_name)
+my_sk.give_eq(department = store1, eq = pri)
 
+print (my_wh.eq_s)
+# print (pri.full_name())
+print (store1.eq)
+print (store.eq)
+print (store2.eq)
