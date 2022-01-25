@@ -1,0 +1,91 @@
+Index: Hometask8/hometask8_4.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Eq:\r\n\r\n    def __init__(self, name):\r\n        self.name = name\r\n        # self.price = price\r\n        # self.quantity = quantity\r\n        # self.items = {'Модель устройства': self.name, 'Цена за одну единицу': self.price, 'Количество': self.quantity}\r\n    # @property\r\n    def full_name (self):\r\n        return f'{self.name} '\r\n    # def adding(self):\r\n    #     try:\r\n    #         name = input(f'Введите название: ')\r\n    #         price = int(input(f'Введите цену за одну единицу товара: '))\r\n    #         quantity = int(input(f'Введите количество товара: '))\r\n    #         item = {'Модель устройства': name, 'Цена за одну единицу': price, 'Количество': quantity}\r\n    #         self.items.update(item)\r\n    #         print(self.items)\r\n    #     except ValueError:\r\n    #         print('Недопустимое значение!')\r\n\r\n\r\n# class Printer(Eq):\r\n#     def __init__(self, name):\r\n#         super().__init__(name)\r\n#         # self.model = model\r\n#\r\n#     def full_name(self):\r\n#         return f'{self.name} '\r\n#\r\n#\r\n# class Scanner(Eq):\r\n#     def __init__(self, name):\r\n#         super().__init__(name)\r\n#         # self.model = model\r\n#\r\n#     def full_name(self):\r\n#         return f'{self.name} '\r\n#\r\n#\r\n# class Xerox(Eq):\r\n#     def __init__(self, name):\r\n#         super().__init__(name)\r\n#         # self.model = model\r\n#\r\n#     def full_name(self):\r\n#         return f'{self.name}  '\r\n\r\n\r\nclass Wh:\r\n    def __init__(self, eq_s=None):\r\n        # self.counterparty = counterparty\r\n        # self.eq = eq\r\n        if not eq_s:\r\n             eq_s ={}\r\n        self.eq_s = eq_s\r\n    def add_eq(self, eq):\r\n        eq_name = eq.full_name()\r\n\r\n        result = self.eq.get(eq_name, None)\r\n        if result:\r\n           self.eq[eq_name] +=1\r\n        else:\r\n           self.eq.update({eq_name:1})\r\n\r\n    def remove_eq(self,eq ):\r\n        eq_name = eq.full_name\r\n\r\n        result = self.eq.get(eq.full_name, None)\r\n        if result and result > 0:\r\n            self.eq[eq_name] -= 1\r\n\r\n        else:\r\n            print('нет товара на складе')\r\n\r\nclass Counterparty:\r\n    def __init__(self, category):\r\n        self.category = category\r\nclass Department (Counterparty):\r\n    def __init__(self, category):\r\n        super(Department, self).__init__(category)\r\n        self.eq = None\r\n        self.have_eq =False\r\n    def add_eq(self, eq):\r\n        self.eq = eq\r\n        self.have_eq = True\r\n\r\n\r\n    def remove_eq(self):\r\n        self.eq = None\r\n        self.have_eq = False\r\n\r\nclass Supplier (Counterparty):\r\n    def __init__(self, category):\r\n        super(Department, self).__init__(category)\r\n        self.eq = None\r\n\r\n    def remove_eq(self):\r\n        pass\r\nclass Storekeeper (Counterparty):\r\n    def __init__(self, category, wh):\r\n        super(Storekeeper, self).__init__(category)\r\n        self.wh = wh\r\n    def give_eq(self,eq, department):\r\n        if not department.have_eq:\r\n            wh_eq = self.wh.remove_eq(eq)\r\n            if wh_eq:\r\n                department.add_eq(eq)\r\n            else:\r\n                print ('нет единицы товара.')\r\n        else:\r\n            print(\"нет единицы товара на складе\")\r\n\r\n    def take_eq(self,eq, department):\r\n        if department.have_eq:\r\n            department.remuve_eq(eq)\r\n            self.wh.add_eq(eq)\r\n\r\n        else:\r\n            print(\"в отделе оборудование не числится.\")\r\n\r\n\r\n\r\n\r\n\r\n    def take_eq_supl(self, eq, supplier):\r\n        supplier.remuve_eq(eq)\r\n        self.wh.add_eq(eq)\r\n\r\npri = Eq('Hp')\r\nsca = Eq('Canon'  )\r\nxe = Eq('Xerox')\r\ntot_eq = {pri.full_name():2,sca.full_name():4,xe.full_name():1}\r\n# pri.add_eq()\r\n# sca.add_eq()\r\n# xe.add_eq()\r\nmy_wh = Wh(tot_eq)\r\nmy_sk = Storekeeper(\"wh1\", my_wh)\r\n# my_sp = Supplier('my_sp')\r\nstore = Department('store')\r\nstore1 = Department('store1')\r\nstore2 = Department('store2')\r\nprint ('0 action')\r\nprint (my_wh.eq_s)\r\n# print (pri.full_name())\r\nprint (store1.eq)\r\nprint (store.eq)\r\nprint (store2.eq)\r\n\r\nprint ('1 action')\r\n# my_sk.take_eq_supl(eq = sca,my_sp = supplier)\r\nmy_sk.give_eq(department = store1, eq = pri)\r\n\r\nprint (my_wh.eq_s)\r\n# print (pri.full_name())\r\nprint (store1.eq)\r\nprint (store.eq)\r\nprint (store2.eq)\r\n
+===================================================================
+diff --git a/Hometask8/hometask8_4.py b/Hometask8/hometask8_4.py
+--- a/Hometask8/hometask8_4.py	
++++ b/Hometask8/hometask8_4.py	
+@@ -5,9 +5,12 @@
+         # self.price = price
+         # self.quantity = quantity
+         # self.items = {'Модель устройства': self.name, 'Цена за одну единицу': self.price, 'Количество': self.quantity}
+-    # @property
++    @property
+     def full_name (self):
+         return f'{self.name} '
++
++    def __str__(self):
++        return self.full_name
+     # def adding(self):
+     #     try:
+     #         name = input(f'Введите название: ')
+@@ -48,13 +51,14 @@
+ 
+ 
+ class Wh:
+-    def __init__(self, eq_s=None):
++    def __init__(self, eq_s=None, eq):
+         # self.counterparty = counterparty
+-        # self.eq = eq
++        self.eq = eq
+         if not eq_s:
+              eq_s ={}
+         self.eq_s = eq_s
+     def add_eq(self, eq):
++        self.eq = eq
+         eq_name = eq.full_name()
+ 
+         result = self.eq.get(eq_name, None)
+@@ -63,10 +67,10 @@
+         else:
+            self.eq.update({eq_name:1})
+ 
+-    def remove_eq(self,eq ):
+-        eq_name = eq.full_name
++    def remove_eq(self,eq):
++        eq_name = eq.full_name()
+ 
+-        result = self.eq.get(eq.full_name, None)
++        result = self.eq.get(eq_name, None)
+         if result and result > 0:
+             self.eq[eq_name] -= 1
+ 
+@@ -92,7 +96,7 @@
+ 
+ class Supplier (Counterparty):
+     def __init__(self, category):
+-        super(Department, self).__init__(category)
++        super(Supplier, self).__init__(category)
+         self.eq = None
+ 
+     def remove_eq(self):
+@@ -130,7 +134,7 @@
+ pri = Eq('Hp')
+ sca = Eq('Canon'  )
+ xe = Eq('Xerox')
+-tot_eq = {pri.full_name():2,sca.full_name():4,xe.full_name():1}
++tot_eq = {pri.full_name:2,sca.full_name:4,xe.full_name:1}
+ # pri.add_eq()
+ # sca.add_eq()
+ # xe.add_eq()
+@@ -148,11 +152,12 @@
+ print (store2.eq)
+ 
+ print ('1 action')
++print (eq.full_name())
+ # my_sk.take_eq_supl(eq = sca,my_sp = supplier)
+-my_sk.give_eq(department = store1, eq = pri)
+-
+-print (my_wh.eq_s)
+-# print (pri.full_name())
+-print (store1.eq)
+-print (store.eq)
+-print (store2.eq)
++# # my_sk.give_eq(department = store1, eq = pri)
++#
++# print (my_wh.eq_s)
++# # print (pri.full_name())
++# print (store1.eq)
++# print (store.eq)
++# print (store2.eq)
